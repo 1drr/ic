@@ -101,6 +101,8 @@ ul, li {
 .brand-logo {
     display: flex;
     align-items: center;
+    justify-content: center;
+    line-height: 0;
     color: var(--color-text-dark);
 }
 

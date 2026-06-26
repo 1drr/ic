@@ -760,14 +760,7 @@ export default function Home() {
                   <textarea id="form-message" required placeholder="Outline your project scope, timeline, and required tech stacks..." value={formData.message} onChange={handleInputChange}></textarea>
                   <span className="error-msg">Please describe your project</span>
                 </div>
-                <div className="form-group">
-                  <label className="budget-label-row">
-                    <span>Estimated Monthly Budget</span>
-                    <span className="budget-value">{Number(formData.budget) >= 100000 ? '$100,000+' : `$${Number(formData.budget).toLocaleString()}`}</span>
-                  </label>
-                  <input type="range" id="form-budget" min="5000" max="100000" step="5000" value={formData.budget} onChange={handleInputChange} className="range-slider" />
-                  <div className="range-limits"><span>$5,000</span><span>$100,000+</span></div>
-                </div>
+
                 <div className="form-group nda-toggle-group">
                   <label className="toggle-switch">
                     <input type="checkbox" id="form-nda" checked={formData.nda} onChange={handleInputChange} />

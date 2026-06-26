@@ -14,7 +14,7 @@ export default function Footer() {
               style={{ width: 'auto', height: '36px', objectFit: 'contain', marginBottom: '8px' }}
             />
           </a>
-          <p className="brand-desc">Vetted engineering teams, AI-accelerated delivery models, and regulatory-compliant custom applications since 2006.</p>
+
           <div className="footer-socials">
             <a href="https://www.facebook.com/brainstation23/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
             <a href="https://twitter.com/BrainStation23" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i className="fa-brands fa-twitter"></i></a>
@@ -69,7 +69,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-lower">
-        <p>&copy; 2026 Intactic Innovations. Built with premium custom styling. All rights reserved.</p>
+        <p>&copy; 2026 Intactic Innovations. All rights reserved.</p>
         <div className="footer-policies">
           <a href="#contact">Privacy Policy</a>
           <a href="#contact">Terms of Service</a>
