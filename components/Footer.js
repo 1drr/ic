@@ -48,11 +48,11 @@ export default function Footer() {
         <div className="footer-links-col">
           <h4>Company</h4>
           <ul>
-            <li><a href="#contact">About Us</a></li>
+            <li><a href="/about-us">About Us</a></li>
             <li><a href="#contact">Blog Insights</a></li>
             <li><a href="#case-studies">Case Studies</a></li>
             <li><a href="#careers">Careers</a></li>
-            <li><a href="#contact">Contact Inquiry</a></li>
+            <li><a href="/contact-us">Contact Inquiry</a></li>
           </ul>
         </div>
       </div>
@@ -69,8 +69,9 @@ export default function Footer() {
       <div className="footer-lower">
         <p>&copy; 2026 Intactic Innovations. All rights reserved.</p>
         <div className="footer-policies">
-          <a href="#contact">Privacy Policy</a>
-          <a href="#contact">Terms of Service</a>
+          <a href="/terms">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/cookies">Cookie Policy</a>
           <a href="#contact">NDA Agreement Templates</a>
         </div>
       </div>

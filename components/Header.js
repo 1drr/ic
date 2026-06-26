@@ -63,11 +63,10 @@ export default function Header() {
             <Image
               src="https://res.cloudinary.com/det1qnlrh/image/upload/v1782432654/Intactic_ltgcnt.png"
               alt="Intactic Logo"
-              width={200}
-              height={40}
+              width={240}
+              height={48}
               priority
               className="logo-img"
-              style={{ width: 'auto', height: '36px', objectFit: 'contain' }}
             />
           </a>
 
@@ -168,11 +167,11 @@ export default function Header() {
                     <div className="megamenu-col">
                       <h4 className="megamenu-title"><i className="fa-solid fa-circle-info"></i> Inside Intactic</h4>
                       <ul className="megamenu-links">
-                        <li><a href="#contact">About Us</a></li>
+                        <li><a href="/about-us">About Us</a></li>
                         <li><a href="#contact">Blog</a></li>
                         <li><a href="#case-studies">Case Studies</a></li>
                         <li><a href="#careers">Career</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="/contact-us">Contact</a></li>
                         <li><a href="#contact">Our Resources</a></li>
                         <li><a href="#contact">Investor Relations</a></li>
                       </ul>
@@ -313,11 +312,11 @@ export default function Header() {
                 <div className="accordion-section">
                   <span className="section-title">Inside Intactic</span>
                   <ul className="sub-links">
-                    <li><a href="#contact" onClick={closeDrawer}>About Us</a></li>
+                    <li><a href="/about-us" onClick={closeDrawer}>About Us</a></li>
                     <li><a href="#contact" onClick={closeDrawer}>Blog</a></li>
                     <li><a href="#case-studies" onClick={closeDrawer}>Case Studies</a></li>
                     <li><a href="#careers" onClick={closeDrawer}>Career</a></li>
-                    <li><a href="#contact" onClick={closeDrawer}>Contact</a></li>
+                    <li><a href="/contact-us" onClick={closeDrawer}>Contact</a></li>
                   </ul>
                 </div>
                 <div className="accordion-section">

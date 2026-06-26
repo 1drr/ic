@@ -1,11 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { heroSlides } from '../../data/contentData';
+import { heroSlides, trustLogos } from '../../data/contentData';
 import styles from './HeroSection.module.css';
+
+// Duplicate trust logos for seamless marquee loop
+const marqueeLogos = [...trustLogos, ...trustLogos];
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const slidesCount = heroSlides.length;
+
+  const goToSlide = useCallback((idx) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide(idx);
+    setTimeout(() => setIsTransitioning(false), 700);
+  }, [isTransitioning]);
+
+  const handlePrevSlide = () => goToSlide((currentSlide - 1 + slidesCount) % slidesCount);
+  const handleNextSlide = () => goToSlide((currentSlide + 1) % slidesCount);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -14,108 +28,173 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, [slidesCount]);
 
-  const handlePrevSlide = () => setCurrentSlide((prev) => (prev - 1 + slidesCount) % slidesCount);
-  const handleNextSlide = () => setCurrentSlide((prev) => (prev + 1) % slidesCount);
-
   return (
-    <section className={styles['hero-section']} id="hero">
-      {/* Background mesh gradients */}
-      <div className={styles['hero-bg-glow-1']} aria-hidden="true" />
-      <div className={styles['hero-bg-glow-2']} aria-hidden="true" />
+    <>
+      <section className={styles.heroSection} id="hero" aria-label="Hero">
+        {/* Background ambient glows */}
+        <div className={styles.heroBgGlow1} aria-hidden="true" />
+        <div className={styles.heroBgGlow2} aria-hidden="true" />
 
-      <div className={styles['hero-slides-track']} style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
-        {heroSlides.map((slide, idx) => (
-          <div key={idx} className={`${styles['hero-slide-full']} ${currentSlide === idx ? styles.active : ''}`}>
-            <div className={styles['hero-slide-inner']}>
-              <div className={styles['hero-text-col']}>
-                <span className={styles['hero-badge']}>
-                  <i className={slide.badge.icon}></i> {slide.badge.text}
-                </span>
-                <p className={styles['hero-sub']}>{slide.tag}</p>
-                <h1 className={styles['hero-h1']}>
-                  Build <span className="gradient-text">{slide.titleHighlight}</span> {slide.title.replace(slide.titleHighlight, '')}
-                </h1>
-                <p className={styles['hero-desc']}>{slide.desc}</p>
-                <div className={styles['hero-cta-row']}>
-                  <a href={slide.cta1.href} className={styles['btn-hero-primary']}>{slide.cta1.label} <i className="fa-solid fa-arrow-right-long"></i></a>
-                  <a href="#services" className={styles['btn-hero-secondary']}>Explore Services <i className="fa-solid fa-angle-down"></i></a>
+        {/* Slides Container — fade-based */}
+        <div className={styles.heroSlidesContainer}>
+          {heroSlides.map((slide, idx) => (
+            <div
+              key={idx}
+              className={`${styles.heroSlide} ${currentSlide === idx ? styles.active : ''}`}
+              aria-hidden={currentSlide !== idx}
+            >
+              <div className={styles.heroSlideInner}>
+                {/* ── Left: Text Column ── */}
+                <div className={styles.heroTextCol}>
+                  <span className={styles.heroBadge}>
+                    <i className={slide.badge.icon} aria-hidden="true" />
+                    {slide.badge.text}
+                  </span>
+
+                  <p className={styles.heroTag}>{slide.tag}</p>
+
+                  <h1 className={styles.heroH1}>
+                    {slide.preTitle}{' '}
+                    <span className="gradient-text">{slide.highlightWord}</span>{' '}
+                    {slide.postTitle}
+                  </h1>
+
+                  <p className={styles.heroDesc}>{slide.desc}</p>
+
+                  <div className={styles.heroCtaRow}>
+                    <a href={slide.cta1.href} className={styles.btnPrimary}>
+                      {slide.cta1.label}
+                      <i className="fa-solid fa-arrow-right-long" aria-hidden="true" />
+                    </a>
+                    <a href="#services" className={styles.btnSecondary}>
+                      Explore Services
+                      <i className="fa-solid fa-angle-down" aria-hidden="true" />
+                    </a>
+                  </div>
+
+                  {/* Slide stats row */}
+                  <div className={styles.heroStatsRow}>
+                    {slide.stats.map((stat, si) => (
+                      <div key={si} className={styles.heroStatItem}>
+                        <span className={styles.heroStatNum}>{stat.num}</span>
+                        <span className={styles.heroStatLbl}>{stat.label}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              
-              <div className={styles['hero-img-col']}>
-                <div className={styles['hero-visual-grid']}>
-                  {/* Overlapping 3D Image Card 1 */}
-                  <div className={`${styles['hero-card-stacked']} ${styles['hero-card-img-1']}`}>
-                    <Image
-                      src={slide.img1}
-                      alt={slide.badge.text}
-                      width={300}
-                      height={220}
-                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                      priority={idx === 0}
-                      unoptimized
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
-                  </div>
-                  
-                  {/* Overlapping 3D Image Card 2 */}
-                  <div className={`${styles['hero-card-stacked']} ${styles['hero-card-img-2']}`}>
-                    <Image
-                      src={slide.img2}
-                      alt={slide.badge.text}
-                      width={260}
-                      height={180}
-                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                      unoptimized
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
-                  </div>
 
-                  {/* Stat Card 1 (Glassmorphic) */}
-                  <div className={`${styles['hero-card-stacked']} ${styles['hero-card-stat-1']}`}>
-                    <span className={styles['hero-grid-stat-num']}>{slide.stats[0].num}</span>
-                    <span className={styles['hero-grid-stat-lbl']}>{slide.stats[0].label}</span>
-                  </div>
-                  
-                  {/* Stat Card 2 (Dark/Brand Glow) */}
-                  <div className={`${styles['hero-card-stacked']} ${styles['hero-card-stat-2']}`}>
-                    <span className={styles['hero-grid-stat-num']}>{slide.stats[1].num}</span>
-                    <span className={styles['hero-grid-stat-lbl']}>{slide.stats[1].label}</span>
-                  </div>
+                {/* ── Right: Visual Column ── */}
+                <div className={styles.heroImgCol} aria-hidden="true">
+                  <div className={styles.heroVisualGrid}>
+                    {/* Image card 1 — main, tilted left */}
+                    <div className={`${styles.heroCard} ${styles.heroCardImg1}`}>
+                      <Image
+                        src={slide.img1}
+                        alt=""
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        priority={idx === 0}
+                        unoptimized
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
+                    </div>
 
-                  {/* Decorative Floating Tech Badges */}
-                  <div className={`${styles['hero-floating-badge']} ${styles['badge-float-1']}`}>
-                    <i className="fa-solid fa-brain"></i> AI & ML
-                  </div>
-                  <div className={`${styles['hero-floating-badge']} ${styles['badge-float-2']}`}>
-                    <i className="fa-brands fa-aws"></i> Cloud Native
-                  </div>
-                  <div className={`${styles['hero-floating-badge']} ${styles['badge-float-3']}`}>
-                    <i className="fa-solid fa-shield-halved"></i> ISO 27001
+                    {/* Image card 2 — secondary, tilted right */}
+                    <div className={`${styles.heroCard} ${styles.heroCardImg2}`}>
+                      <Image
+                        src={slide.img2}
+                        alt=""
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        unoptimized
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
+                    </div>
+
+                    {/* Glassmorphic stat card */}
+                    <div className={`${styles.heroCard} ${styles.heroCardStat1}`}>
+                      <span className={styles.cardStatNum}>{slide.stats[0].num}</span>
+                      <span className={styles.cardStatLbl}>{slide.stats[0].label}</span>
+                    </div>
+
+                    {/* Dark brand stat card */}
+                    <div className={`${styles.heroCard} ${styles.heroCardStat2}`}>
+                      <span className={styles.cardStatNum}>{slide.stats[1].num}</span>
+                      <span className={styles.cardStatLbl}>{slide.stats[1].label}</span>
+                    </div>
+
+                    {/* Floating tech badges */}
+                    <div className={`${styles.floatingBadge} ${styles.badgeFloat1}`}>
+                      <i className="fa-solid fa-brain" aria-hidden="true" />
+                      AI &amp; ML
+                    </div>
+                    <div className={`${styles.floatingBadge} ${styles.badgeFloat2}`}>
+                      <i className="fa-brands fa-aws" aria-hidden="true" />
+                      Cloud Native
+                    </div>
+                    <div className={`${styles.floatingBadge} ${styles.badgeFloat3}`}>
+                      <i className="fa-solid fa-shield-halved" aria-hidden="true" />
+                      ISO 27001
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          ))}
+
+          {/* Prev / Next Arrows */}
+          <button
+            className={`${styles.heroArrow} ${styles.heroArrowLeft}`}
+            onClick={handlePrevSlide}
+            aria-label="Previous slide"
+          >
+            <i className="fa-solid fa-chevron-left" aria-hidden="true" />
+          </button>
+          <button
+            className={`${styles.heroArrow} ${styles.heroArrowRight}`}
+            onClick={handleNextSlide}
+            aria-label="Next slide"
+          >
+            <i className="fa-solid fa-chevron-right" aria-hidden="true" />
+          </button>
+
+          {/* Slide indicator dots */}
+          <div className={styles.heroDots} role="tablist" aria-label="Slide indicators">
+            {heroSlides.map((_, idx) => (
+              <button
+                key={idx}
+                role="tab"
+                aria-selected={currentSlide === idx}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`${styles.heroDot} ${currentSlide === idx ? styles.activeDot : ''}`}
+                onClick={() => goToSlide(idx)}
+              />
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* ── Trust / Client Logo Bar ── */}
+        <div className={styles.trustBar} aria-label="Trusted by">
+          <p className={styles.trustBarLabel}>Trusted by teams building products at</p>
+          <div className={styles.marqueeContainer} aria-hidden="true">
+            <div className={styles.marqueeTrack}>
+              {marqueeLogos.map((logo, i) => (
+                <div key={i} className={styles.trustLogoPill}>
+                  <i className={logo.icon} />
+                  <span>{logo.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Hero → Capabilities wave bridge ── */}
+      <div className={styles.heroWaveBridge} aria-hidden="true">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff" />
+        </svg>
       </div>
-
-      {/* Arrows */}
-      <button className={`${styles['hero-arrow']} ${styles['hero-arrow-left']}`} onClick={handlePrevSlide} aria-label="Previous">
-        <i className="fa-solid fa-chevron-left"></i>
-      </button>
-      <button className={`${styles['hero-arrow']} ${styles['hero-arrow-right']}`} onClick={handleNextSlide} aria-label="Next">
-        <i className="fa-solid fa-chevron-right"></i>
-      </button>
-
-      {/* Dots */}
-      <div className={styles['hero-dots']}>
-        {heroSlides.map((_, idx) => (
-          <button key={idx} className={`${styles['hero-dot']} ${currentSlide === idx ? styles.active : ''}`} onClick={() => setCurrentSlide(idx)} aria-label={`Slide ${idx + 1}`}></button>
-        ))}
-      </div>
-
-    </section>
+    </>
   );
 }
-

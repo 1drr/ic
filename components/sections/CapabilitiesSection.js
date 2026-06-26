@@ -3,20 +3,7 @@ import styles from './CapabilitiesSection.module.css';
 
 export default function CapabilitiesSection() {
   return (
-    <>
-      {/* ── HERO → CAPABILITIES BRIDGE ── */}
-      <div className={styles['hero-to-caps-bridge']} aria-hidden="true">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#F8FAFC" />
-        </svg>
-        <div className={styles['bridge-scroll-hint']}>
-          <span>Our Capabilities</span>
-          <i className="fa-solid fa-chevron-down"></i>
-        </div>
-      </div>
-
-      {/* ── 2. CORE CAPABILITIES / SERVICES ── */}
-      <section className={styles['capabilities-section']} id="services">
+    <section className={styles['capabilities-section']} id="services">
         <div className={styles['caps-bg-grid']} aria-hidden="true" />
         <div className="section-container">
           <div className={styles['caps-header']}>
@@ -48,6 +35,5 @@ export default function CapabilitiesSection() {
           </div>
         </div>
       </section>
-    </>
   );
 }

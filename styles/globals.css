@@ -7,7 +7,7 @@
    1. Design Tokens & CSS Variables
    ------------------------------------------------------------- */
 :root {
-    --font-primary: 'Manrope', sans-serif;
+    --font-primary: 'Plus Jakarta Sans', 'Inter', 'Manrope', sans-serif;
     
     /* Brand Colors */
     --color-brand: #1D9EDA;       /* Vibrant Cyan */
@@ -19,8 +19,8 @@
     --color-white: #FFFFFF;
     
     /* Layout & Spacing */
-    --header-height-normal: 90px;
-    --header-height-sticky: 70px;
+    --header-height-normal: 104px;
+    --header-height-sticky: 76px;
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -75,7 +75,7 @@ ul, li {
                 border-color var(--transition-normal),
                 padding var(--transition-normal), 
                 box-shadow var(--transition-normal);
-    padding: 24px 0;
+    padding: 29px 0;
 }
 
 .header-container {
@@ -89,12 +89,10 @@ ul, li {
 }
 
 .site-header.sticky {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background-color: #F8FAFC; /* Solid off-white/greyish color */
     border-bottom: 1px solid rgba(17, 23, 44, 0.06);
     box-shadow: 0 2px 20px rgba(17, 23, 44, 0.08);
-    padding: 14px 0;
+    padding: 16px 0;
 }
 
 /* Brand Logo */
@@ -105,10 +103,15 @@ ul, li {
     line-height: 0;
     color: var(--color-text-dark);
 }
-
-.logo-svg {
-    height: 32px;
+.logo-img {
+    height: 46px;
     width: auto;
+    object-fit: contain;
+    transition: height var(--transition-normal);
+}
+
+.site-header.sticky .logo-img {
+    height: 38px;
 }
 
 /* Logo Color shifting: Initial (on dark hero bg overlay) -> Dark Navy on scroll sticky */
@@ -140,14 +143,15 @@ ul, li {
 }
 
 .nav-link {
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--color-text-dark);
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 8px 0;
     position: relative;
+    letter-spacing: -0.01em;
 }
 
 .nav-arrow {
@@ -319,23 +323,24 @@ ul, li {
 }
 
 .cta-button {
-    background-color: var(--color-brand);
-    color: var(--color-white);
-    font-weight: 600;
+    background-color: #FBAF32;
+    color: var(--color-text-dark);
+    font-weight: 700;
     font-size: 0.9rem;
     padding: 12px 24px;
     border-radius: 50px;
     border: none;
-    box-shadow: 0 4px 14px rgba(29, 158, 218, 0.25);
+    box-shadow: 0 4px 14px rgba(251, 175, 50, 0.3);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: all var(--transition-fast);
 }
 
 .cta-button:hover {
-    background-color: var(--color-brand-hover);
+    background-color: #E69D24;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(29, 158, 218, 0.35);
+    box-shadow: 0 6px 20px rgba(251, 175, 50, 0.4);
 }
 
 .cta-button:active {
@@ -558,19 +563,20 @@ ul, li {
 
 .drawer-cta {
     width: 100%;
-    background-color: var(--color-brand);
-    color: var(--color-white);
-    font-weight: 600;
+    background-color: #FBAF32;
+    color: var(--color-text-dark);
+    font-weight: 700;
     font-size: 0.95rem;
     padding: 14px;
-    border-radius: 8px;
+    border-radius: 50px; /* Fully rounded to match desktop style */
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all var(--transition-fast);
 }
 
 .drawer-cta:hover {
-    background-color: var(--color-brand-hover);
+    background-color: #E69D24;
 }
 
 /* Mobile Drawer Overlay background blur */
@@ -866,6 +872,8 @@ body.scroll-locked {
 @media (max-width: 1023px) {
     .site-header { padding: 16px 0; }
     .site-header.sticky { padding: 12px 0; }
+    .logo-img { height: 36px !important; }
+    .site-header.sticky .logo-img { height: 30px !important; }
     .desktop-nav { display: none; }
     .mobile-toggle { display: flex; }
 
@@ -877,7 +885,7 @@ body.scroll-locked {
 @media (max-width: 767px) {
     /* Header */
     .site-header .cta-button { display: none; }
-    .logo-svg { height: 26px; }
+    .logo-img { height: 30px !important; }
     .site-header { padding: 14px 0; }
 
     /* Global typography */

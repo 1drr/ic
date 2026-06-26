@@ -1,8 +1,8 @@
 /* ── CAPABILITIES SECTION ── */
 /* ── CAPABILITIES SECTION ── */
 .capabilities-section {
-  padding: 110px 0;
-  background: #F8FAFC;
+  padding: 70px 0 110px;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
 }
@@ -196,43 +196,6 @@
 }
 .cap-link:hover { gap: 10px; }
 
-/* Hero → Capabilities Bridge */
-.hero-to-caps-bridge {
-  position: relative;
-  background: linear-gradient(180deg, transparent 0%, #ffffff 100%);
-  margin-top: -2px;
-  text-align: center;
-  padding-bottom: 40px;
-}
-
-.hero-to-caps-bridge svg {
-  display: block;
-  width: 100%;
-  height: 80px;
-}
-
-.bridge-scroll-hint {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  margin-top: -20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-brand);
-}
-
-.bridge-scroll-hint i {
-  font-size: 1rem;
-  animation: bounceDown 1.6s ease-in-out infinite;
-}
-
-@keyframes bounceDown {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
 
 @media (max-width: 1024px) {
   .caps-grid { grid-template-columns: repeat(2, 1fr); }

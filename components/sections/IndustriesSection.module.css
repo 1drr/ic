@@ -1,79 +1,139 @@
 /* ── INDUSTRIES SECTION ── */
 .industries-section {
   padding: 100px 0;
-  background: var(--color-text-dark);
+  background: #0d1e2d; /* Premium deep navy blue background matching the screenshot style */
+  font-family: var(--font-primary);
 }
 
 .industries-header {
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 64px;
 }
-.industries-header .section-pretitle { color: #90CDF4; }
-.industries-header .section-title { color: #fff; }
+
+.industries-header h2 {
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 0;
+}
 
 .industries-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px; /* Generous gap for premium look */
 }
 
 .industry-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: #172d42; /* Premium high-contrast corporate card blue */
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
-  padding: 28px 24px;
+  padding: 44px 36px;
   transition: all var(--transition-normal);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  min-height: 320px;
 }
+
 .industry-card:hover {
-  background: rgba(29, 158, 218, 0.12);
-  border-color: rgba(29, 158, 218, 0.4);
-  transform: translateY(-4px);
+  background: #1f3a54; /* Slightly brighter on hover */
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .industry-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-  background: rgba(29, 158, 218, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  color: var(--color-brand);
-  margin-bottom: 16px;
+  font-size: 2.8rem;
+  color: #ffffff;
+  margin-bottom: 28px;
+  line-height: 1;
+  opacity: 0.95;
 }
 
 .industry-card h3 {
-  font-size: 1rem;
+  font-size: 1.85rem; /* Larger, premium, bold title */
   font-weight: 700;
-  color: #fff;
-  margin-bottom: 10px;
-}
-.industry-card p {
-  font-size: 0.88rem;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.6;
+  color: #ffffff;
   margin-bottom: 16px;
+  letter-spacing: -0.02em;
 }
+
+.industry-card p {
+  font-size: 1rem; /* Highly readable description */
+  color: #d1d5db; /* Clean high-contrast text color */
+  line-height: 1.7;
+  margin-bottom: 32px;
+  flex-grow: 1;
+}
+
 .industry-link {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  color: var(--color-brand);
+  color: #f59e0b; /* Bright amber/orange */
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   text-decoration: none;
   transition: gap var(--transition-fast);
+  margin-top: auto;
 }
-.industry-link:hover { gap: 10px; }
+
+.industry-link:hover { gap: 14px; }
+
+/* Special CTA Card */
+.industry-cta-card {
+  background: #172d42;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 44px 36px;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.industry-cta-card p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 28px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.btn-lets-talk {
+  background-color: #f59e0b;
+  color: #0d1e2d;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 14px 36px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+}
+
+.btn-lets-talk:hover {
+  background-color: #d97706;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
+}
 
 @media (max-width: 1024px) {
-  .industries-grid { grid-template-columns: repeat(2, 1fr); }
+  .industries-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .industry-card, .industry-cta-card { min-height: auto; padding: 36px 28px; }
+  .industries-header h2 { font-size: 2.5rem; }
 }
 
 @media (max-width: 640px) {
-  .industries-grid { grid-template-columns: repeat(2, 1fr); }
+  .industries-grid { grid-template-columns: 1fr; }
+  .industry-card h3 { font-size: 1.5rem; }
+  .industries-header h2 { font-size: 2rem; }
 }
-
-
