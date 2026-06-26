@@ -721,11 +721,7 @@ export default function Home() {
               <span className="section-pretitle">Start Your Journey</span>
               <h2>Ready to Scale<br />Your Team?</h2>
               <p>Tell us about your project requirements, technology stacks, or resource needs. An engineering lead will coordinate a review feedback document within 24 hours.</p>
-              <div className="contact-features">
-                <div className="c-feat"><i className="fa-solid fa-clock"></i> <span>24-Hour Lead Response Time</span></div>
-                <div className="c-feat"><i className="fa-solid fa-user-check"></i> <span>Zero-Risk 2-Week Developer Trial</span></div>
-                <div className="c-feat"><i className="fa-solid fa-lock"></i> <span>Strict Confidentiality & NDA Protection</span></div>
-              </div>
+
               <div className="contact-social-row">
                 {[
                   { icon: 'fa-brands fa-linkedin', href: 'https://www.linkedin.com/company/brainstation-23' },
