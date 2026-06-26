@@ -55,7 +55,6 @@ export default function Footer() {
             <li><a href="#case-studies">Case Studies</a></li>
             <li><a href="https://brainstation-23.easy.jobs/" target="_blank" rel="noopener noreferrer">Careers</a></li>
             <li><a href="#contact">Contact Inquiry</a></li>
-            <li><a href="#global-offices">Global Offices</a></li>
           </ul>
         </div>
       </div>

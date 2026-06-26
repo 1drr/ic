@@ -706,32 +706,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 13. GLOBAL OFFICES ── */}
-        <section className="offices-section" id="global-offices">
-          <div className="section-container">
-            <span className="section-pretitle">Global Footprint</span>
-            <h2 className="section-title text-center">Our Global Offices</h2>
-            <div className="offices-grid">
-              {[
-                { flag: '🇧🇩', country: 'Bangladesh (HQ)', addr: '8th Floor, 2 Bir Uttam AK Khandakar Road, Mohakhali C/A, Dhaka 1212', phone: '+88 01404055226' },
-                { flag: '🇩🇪', country: 'Germany', addr: 'Stadttor 1, 40219 Düsseldorf, Germany', phone: '+49 211 3855 0' },
-                { flag: '🇲🇾', country: 'Malaysia', addr: 'Level 28, PJ Exchange, 2A Persiaran Barat, Petaling Jaya, Selangor', phone: '+60 3 7962 0000' },
-                { flag: '🇺🇸', country: 'USA', addr: '500 7th Ave, New York, NY 10018, United States', phone: '+1 212 900 2300' },
-                { flag: '🇦🇪', country: 'UAE', addr: 'In5 Tech, Dubai Internet City, Dubai, United Arab Emirates', phone: '+971 4 456 2300' },
-                { flag: '🇯🇵', country: 'Japan', addr: '3-1-1 Nishi-Shinjuku, Shinjuku-ku, Tokyo 163-0428, Japan', phone: '+81 3 5322 0000' },
-              ].map((office, i) => (
-                <div key={i} className="office-card">
-                  <div className="office-flag-emoji">{office.flag}</div>
-                  <h3>{office.country}</h3>
-                  <p>{office.addr}</p>
-                  <a href={`tel:${office.phone.replace(/\s/g, '')}`} className="office-phone">
-                    <i className="fa-solid fa-phone"></i> {office.phone}
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
         {/* ── 14. CONTACT FORM ── */}
         <section className="contact-section" id="contact">

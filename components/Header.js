@@ -207,9 +207,7 @@ export default function Header() {
                 </div>
               </li>
 
-              <li className="nav-item">
-                <a href="#global-offices" className="nav-link">Global Offices</a>
-              </li>
+
             </ul>
           </nav>
 
@@ -362,9 +360,7 @@ export default function Header() {
               </div>
             </li>
 
-            <li className="drawer-menu-item">
-              <a href="#global-offices" className="direct-link" onClick={closeDrawer}>Global Offices</a>
-            </li>
+
           </ul>
 
           <div className="drawer-footer">
