@@ -6,7 +6,7 @@ Marketing & corporate website for **Intactic Innovations**, built with Next.js (
 
 - **Framework**: Next.js `^14.2.18`
 - **UI**: React `^18.3.1`, CSS Modules, Font Awesome 6
-- **Image CDN**: Cloudinary (via `next-cloudinary` + `next/image`)
+- **Image CDN**: Cloudinary (via `next/image`)
 - **Speed Insights**: `@vercel/speed-insights`
 
 ## Getting Started
@@ -14,15 +14,11 @@ Marketing & corporate website for **Intactic Innovations**, built with Next.js (
 > PowerShell note: the execution policy blocks `npm.ps1` — use `npm.cmd` instead.
 
 ```powershell
-npm.cmd install --legacy-peer-deps
+npm.cmd install
 npm.cmd run dev
 ```
 
 The site runs on <http://localhost:3000>.
-
-### Why `--legacy-peer-deps`?
-
-`next-cloudinary@^2.0.5` declares peer compatibility with Next 12/13 only. We're pinned to Next 14 for security and stability, so the legacy flag skips the strict peer check. (Migration to `next-cloudinary@^6` is on the roadmap.)
 
 ## Scripts
 
