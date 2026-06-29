@@ -47,6 +47,13 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
+    /* prevent horizontal page swipe on mobile */
+    overscroll-behavior-x: none;
+    /* hard-clamp the viewport so nothing can extend the document width */
+    max-width: 100%;
+    width: 100%;
+    position: relative;
 }
 
 body {
@@ -55,6 +62,14 @@ body {
     background-color: var(--color-white);
     line-height: 1.6;
     overflow-x: hidden;
+    /* contain any overscroll horizontally on body level too */
+    overscroll-behavior-x: none;
+    /* hard-clamp the viewport */
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    /* stop the browser's swipe-back history gesture from hijacking touch */
+    touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
     /* cleaner mobile taps */
 }
