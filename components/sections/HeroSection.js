@@ -1,217 +1,230 @@
-import { useState, useEffect, useCallback } from 'react';
-import { heroSlides, trustLogos } from '../../data/contentData';
+import { useEffect, useState } from 'react';
+import { heroConfig, trustLogos } from '../../data/contentData';
 import styles from './HeroSection.module.css';
 
-const marqueeLogos = [...trustLogos, ...trustLogos];
-
 export default function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const slidesCount = heroSlides.length;
+  const {
+    pill,
+    heading,
+    subheading,
+    primaryCta,
+    secondaryCta,
+    metrics,
+    illustration,
+    chatWidget,
+  } = heroConfig;
 
-  const goToSlide = useCallback((idx) => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setCurrentSlide(idx);
-    setTimeout(() => setIsTransitioning(false), 700);
-  }, [isTransitioning]);
-
-  const handlePrevSlide = () => goToSlide((currentSlide - 1 + slidesCount) % slidesCount);
-  const handleNextSlide = () => goToSlide((currentSlide + 1) % slidesCount);
+  // Cycle the "typing" placeholder lines for the AI chat widget
+  const prompts = [
+    chatWidget.prompt,
+    'Tell me about your AI engineering services.',
+    'What industries do you serve?',
+    'Can you scope an MVP for our startup?',
+    'How fast can you ship a SaaS MVP?',
+  ];
+  const [promptIdx, setPromptIdx] = useState(0);
+  const [typed, setTyped] = useState('');
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slidesCount);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [slidesCount]);
+    const text = prompts[promptIdx];
+    let i = 0;
+    setTyped('');
+    const typer = setInterval(() => {
+      i += 1;
+      setTyped(text.slice(0, i));
+      if (i >= text.length) clearInterval(typer);
+    }, 35);
+    const rotator = setTimeout(() => {
+      setPromptIdx((p) => (p + 1) % prompts.length);
+    }, 5200);
+    return () => {
+      clearInterval(typer);
+      clearTimeout(rotator);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [promptIdx]);
+
+  const marqueeLogos = [...trustLogos, ...trustLogos];
 
   return (
-    <>
-      <section className={styles.heroSection} id="hero" aria-label="Hero">
-        <div className={styles.heroBgGlow1} aria-hidden="true" />
-        <div className={styles.heroBgGlow2} aria-hidden="true" />
+    <section
+      className={styles.heroSection}
+      id="hero"
+      aria-label="Intactic Innovations hero"
+    >
+      {/* ═══ Background ambient glow + radial canvas ═══ */}
+      <div className={styles.heroBgGradient} aria-hidden="true" />
+      <div className={styles.heroBgGrid} aria-hidden="true" />
+      <div className={styles.heroGlowOrbA} aria-hidden="true" />
+      <div className={styles.heroGlowOrbB} aria-hidden="true" />
+      <div className={styles.heroNoiseLayer} aria-hidden="true" />
 
-        <div className={styles.heroSlidesContainer}>
-          {heroSlides.map((slide, idx) => (
-            <div
-              key={idx}
-              className={`${styles.heroSlide} ${currentSlide === idx ? styles.active : ''}`}
-              aria-hidden={currentSlide !== idx}
+      <div className={styles.heroInner}>
+        {/* ═══ Small ecosystem pill tag ═══ */}
+        <div className={styles.heroPill}>
+          <span className={styles.heroPillDot} />
+          <i className={pill.icon} aria-hidden="true" />
+          <span>{pill.text}</span>
+        </div>
+
+        {/* ═══ Massive headline — three stacked words with mixed weight ═══ */}
+        <h1 className={styles.heroHeading}>
+          <span className={styles.heroH1Line}>{heading.pre}</span>
+          <span className={`${styles.heroH1Line} ${styles.heroH1Highlight}`}>
+            {heading.highlight}
+          </span>
+          <span className={styles.heroH1Line}>{heading.post}</span>
+        </h1>
+
+        {/* ═══ Subheading copy ═══ */}
+        <p className={styles.heroSub}>{subheading}</p>
+
+        {/* ═══ CTA pair ═══ */}
+        <div className={styles.heroCtaRow}>
+          <a
+            className={`${styles.heroBtn} ${styles.heroBtnPrimary}`}
+            href={primaryCta.href}
+          >
+            <span>{primaryCta.label}</span>
+            <i className="fa-solid fa-arrow-right-long" aria-hidden="true" />
+          </a>
+          <a
+            className={`${styles.heroBtn} ${styles.heroBtnSecondary}`}
+            href={secondaryCta.href}
+          >
+            <i className="fa-solid fa-rocket" aria-hidden="true" />
+            <span>{secondaryCta.label}</span>
+          </a>
+        </div>
+
+        {/* ═══ Brand / ecosystem pill row ═══ */}
+        <div className={styles.heroBrandRow} aria-label="Ecosystem brands">
+          {marqueeLogos.map((logo, i) => (
+            <span className={styles.heroBrandChip} key={`${logo.label}-${i}`}>
+              <i className={logo.icon} aria-hidden="true" />
+              <span>{logo.label}</span>
+            </span>
+          ))}
+        </div>
+
+        {/* ═══ Illustration stage with metrics strip ═══ */}
+        <div className={styles.heroStage} aria-hidden="false">
+          <div className={styles.heroStageImageWrap}>
+            {/* Looping background video — autoplay, muted, inline on mobile */}
+            <video
+              className={styles.heroStageVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={illustration.poster}
+              aria-label={illustration.caption}
             >
-              <div className={styles.heroSlideInner}>
+              <source src={illustration.video.webm} type="video/webm" />
+              <source src={illustration.video.mp4} type="video/mp4" />
+              <source src={illustration.video.mp4Low} type="video/mp4" />
+              {/* Static fallback for browsers that can't play the video */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.heroStageImage}
+                src={illustration.poster}
+                alt={illustration.caption}
+                loading="eager"
+              />
+            </video>
+            <div className={styles.heroStageScrim} />
+            <div className={styles.heroStageVignette} />
 
-                {/* ── LEFT: Text Column ── */}
-                <div className={styles.heroTextCol}>
-                  <span className={styles.heroBadge} style={{ borderColor: slide.accent + '44', color: slide.accent, background: slide.accent + '12' }}>
-                    <i className={slide.badge.icon} aria-hidden="true" />
-                    {slide.badge.text}
-                  </span>
+            {/* Caption badge */}
+            <div className={styles.heroStageBadge}>
+              <i className="fa-solid fa-microchip" aria-hidden="true" />
+              <span>{illustration.caption}</span>
+            </div>
 
-                  <p className={styles.heroTag}>{slide.tag}</p>
-
-                  <h1 className={styles.heroH1}>
-                    {slide.preTitle}{' '}
-                    <span className="gradient-text">{slide.highlightWord}</span>{' '}
-                    {slide.postTitle}
-                  </h1>
-
-                  <p className={styles.heroDesc}>{slide.desc}</p>
-
-                  <div className={styles.heroCtaRow}>
-                    <a href={slide.cta1.href} className={styles.btnPrimary}>
-                      {slide.cta1.label}
-                      <i className="fa-solid fa-arrow-right-long" aria-hidden="true" />
-                    </a>
-                    <a href="#services" className={styles.btnSecondary}>
-                      Explore Services
-                      <i className="fa-solid fa-angle-down" aria-hidden="true" />
-                    </a>
-                  </div>
-
-                  <div className={styles.heroStatsRow}>
-                    {slide.stats.map((stat, si) => (
-                      <div key={si} className={styles.heroStatItem}>
-                        <span className={styles.heroStatNum} style={{ color: si === 0 ? slide.accent : undefined }}>{stat.num}</span>
-                        <span className={styles.heroStatLbl}>{stat.label}</span>
-                      </div>
-                    ))}
-                    <div className={styles.heroStatDivider} />
-                    <div className={styles.heroStatItem}>
-                      <span className={styles.heroStatNum}>12+</span>
-                      <span className={styles.heroStatLbl}>Years Active</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ── RIGHT: Visual Column ── */}
-                <div className={styles.heroImgCol} aria-hidden="true">
-                  <div className={styles.heroVisualWrap}>
-
-                    {/* Decorative grid lines bg */}
-                    <div className={styles.gridBg} />
-
-                    {/* Main large image card */}
-                    <div className={styles.mainImgCard} style={{ '--slide-accent': slide.accent }}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={slide.img1}
-                        alt=""
-                        className={styles.mainImg}
-                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                      />
-                      {/* Gradient scrim at bottom */}
-                      <div className={styles.mainImgScrim} style={{ background: `linear-gradient(to top, ${slide.accent}CC 0%, transparent 60%)` }} />
-
-                      {/* Stat pill on image — top left */}
-                      <div className={styles.imgBadgePill}>
-                        <i className="fa-solid fa-circle-check" style={{ color: '#22C55E' }} />
-                        <span>Live & Deployed</span>
-                      </div>
-                    </div>
-
-                    {/* Secondary image — bottom right, smaller */}
-                    <div className={styles.secondaryImgCard}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={slide.img2}
-                        alt=""
-                        className={styles.secondaryImg}
-                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                      />
-                      <div className={styles.secondaryImgOverlay} style={{ background: `linear-gradient(135deg, ${slide.accent}44 0%, transparent 70%)` }} />
-                    </div>
-
-                    {/* Glassmorphic stat card — top right */}
-                    <div className={styles.glassStatCard}>
-                      <div className={styles.glassStatIcon} style={{ background: slide.accent + '18', color: slide.accent }}>
-                        <i className="fa-solid fa-chart-line" />
-                      </div>
-                      <span className={styles.glassStatNum} style={{ color: slide.accent }}>{slide.stats[0].num}</span>
-                      <span className={styles.glassStatLbl}>{slide.stats[0].label}</span>
-                    </div>
-
-                    {/* Dark metric card — bottom left */}
-                    <div className={styles.darkMetricCard}>
-                      <div className={styles.darkMetricTop}>
-                        <i className="fa-solid fa-star" style={{ color: '#FBAF32', fontSize: '0.8rem' }} />
-                        <i className="fa-solid fa-star" style={{ color: '#FBAF32', fontSize: '0.8rem' }} />
-                        <i className="fa-solid fa-star" style={{ color: '#FBAF32', fontSize: '0.8rem' }} />
-                        <i className="fa-solid fa-star" style={{ color: '#FBAF32', fontSize: '0.8rem' }} />
-                        <i className="fa-solid fa-star" style={{ color: '#FBAF32', fontSize: '0.8rem' }} />
-                      </div>
-                      <span className={styles.darkMetricNum}>{slide.stats[1].num}</span>
-                      <span className={styles.darkMetricLbl}>{slide.stats[1].label}</span>
-                    </div>
-
-                    {/* Floating tech stack dot pills */}
-                    <div className={`${styles.techPill} ${styles.techPill1}`}>
-                      <i className="fa-brands fa-react" style={{ color: '#61DAFB' }} />
-                      <span>React</span>
-                    </div>
-                    <div className={`${styles.techPill} ${styles.techPill2}`}>
-                      <i className="fa-brands fa-node-js" style={{ color: '#68A063' }} />
-                      <span>Node.js</span>
-                    </div>
-                    <div className={`${styles.techPill} ${styles.techPill3}`}>
-                      <i className="fa-brands fa-python" style={{ color: '#3776AB' }} />
-                      <span>AI / ML</span>
-                    </div>
-
-                    {/* Animated accent ring */}
-                    <div className={styles.accentRing} style={{ borderColor: slide.accent + '22' }} />
-                  </div>
-                </div>
-
+            {/* Metric cards floating on the illustration */}
+            <div className={`${styles.heroMetricPill} ${styles.heroMetricPillA}`}>
+              <div className={styles.heroMetricPillIcon}>
+                <i className="fa-solid fa-chart-line" aria-hidden="true" />
+              </div>
+              <div>
+                <div className={styles.heroMetricPillNum}>{metrics[0].num}</div>
+                <div className={styles.heroMetricPillLbl}>{metrics[0].label}</div>
               </div>
             </div>
-          ))}
 
-          {/* Arrows */}
-          <button className={`${styles.heroArrow} ${styles.heroArrowLeft}`} onClick={handlePrevSlide} aria-label="Previous slide">
-            <i className="fa-solid fa-chevron-left" aria-hidden="true" />
-          </button>
-          <button className={`${styles.heroArrow} ${styles.heroArrowRight}`} onClick={handleNextSlide} aria-label="Next slide">
-            <i className="fa-solid fa-chevron-right" aria-hidden="true" />
-          </button>
+            <div className={`${styles.heroMetricPill} ${styles.heroMetricPillB}`}>
+              <div
+                className={`${styles.heroMetricPillIcon} ${styles.heroMetricPillIconDark}`}
+              >
+                <i className="fa-solid fa-star" aria-hidden="true" />
+              </div>
+              <div>
+                <div className={styles.heroMetricPillNum}>{metrics[1].num}</div>
+                <div className={styles.heroMetricPillLbl}>{metrics[1].label}</div>
+              </div>
+            </div>
 
-          {/* Dots */}
-          <div className={styles.heroDots} role="tablist" aria-label="Slide indicators">
-            {heroSlides.map((_, idx) => (
-              <button
-                key={idx}
-                role="tab"
-                aria-selected={currentSlide === idx}
-                aria-label={`Go to slide ${idx + 1}`}
-                className={`${styles.heroDot} ${currentSlide === idx ? styles.activeDot : ''}`}
-                onClick={() => goToSlide(idx)}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ── Trust Bar ── */}
-        <div className={styles.trustBar} aria-label="Trusted by">
-          <p className={styles.trustBarLabel}>Trusted by teams building products at</p>
-          <div className={styles.marqueeContainer} aria-hidden="true">
-            <div className={styles.marqueeTrack}>
-              {marqueeLogos.map((logo, i) => (
-                <div key={i} className={styles.trustLogoPill}>
-                  <i className={logo.icon} />
-                  <span>{logo.label}</span>
-                </div>
-              ))}
+            <div className={`${styles.heroMetricPill} ${styles.heroMetricPillC}`}>
+              <div
+                className={`${styles.heroMetricPillIcon} ${styles.heroMetricPillIconAccent}`}
+              >
+                <i className="fa-solid fa-globe" aria-hidden="true" />
+              </div>
+              <div>
+                <div className={styles.heroMetricPillNum}>{metrics[2].num}</div>
+                <div className={styles.heroMetricPillLbl}>{metrics[2].label}</div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Wave bridge */}
-      <div className={styles.heroWaveBridge} aria-hidden="true">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff" />
-        </svg>
       </div>
-    </>
+
+      {/* ═══ AI chat widget — bottom-right floating card ═══ */}
+      <aside
+        className={styles.heroChat}
+        role="complementary"
+        aria-label="AI Assistant"
+      >
+        <div className={styles.heroChatShell}>
+          <div className={styles.heroChatHeader}>
+            <div className={styles.heroChatAvatarWrap}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.heroChatAvatar}
+                src={chatWidget.avatar}
+                alt={`${chatWidget.name} avatar`}
+              />
+              <span className={styles.heroChatStatusDot} />
+            </div>
+            <div className={styles.heroChatHeaderText}>
+              <strong>{chatWidget.name}</strong>
+              <span>{chatWidget.handle}</span>
+            </div>
+            <i
+              className={`fa-solid fa-xmark ${styles.heroChatClose}`}
+              aria-hidden="true"
+            />
+          </div>
+
+          <div className={styles.heroChatBody}>
+            <div className={styles.heroChatBubble}>
+              <i className="fa-solid fa-hand-sparkles" aria-hidden="true" />
+              <p>
+                <span className={styles.heroChatTyping}>
+                  {typed}
+                  <span className={styles.heroChatCaret}>|</span>
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <button type="button" className={styles.heroChatCta}>
+            {chatWidget.cta}
+            <i className="fa-solid fa-arrow-right-long" aria-hidden="true" />
+          </button>
+        </div>
+      </aside>
+    </section>
   );
 }

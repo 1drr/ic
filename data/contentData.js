@@ -4,41 +4,53 @@
 // শুধু UI রেন্ডারিং করে এবং ডাটা আলাদা থাকে।
 // =============================================================
 
-export const heroSlides = [
-  {
-    badge: { icon: 'fa-solid fa-microchip', text: 'AI-First Engineering' },
-    tag: 'Global Software Development Partner',
-    preTitle: 'Build',
-    highlightWord: 'Intelligent,',
-    postTitle: 'Scalable Software That Grows With Your Business.',
-    desc: 'From custom SaaS to enterprise platforms — Intactic delivers AI-powered, cloud-native solutions engineered for speed, security, and scale.',
-    cta1: { label: 'Start a Project', href: '#contact' },
-    accent: '#1D9EDA',
-    stats: [
-      { num: '200+', label: 'Products Shipped' },
-      { num: '98%', label: 'Client Satisfaction' },
-    ],
-    img1: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=85',
-    img2: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80',
+// =============================================================
+// Hero Configuration — mirrors Betopia Group's hero layout:
+// big mixed-weight headline, illustration stage, AI chat widget,
+// and a row of ecosystem brand pills. Single, non-rotating panel.
+// =============================================================
+export const heroConfig = {
+  pill: {
+    icon: 'fa-solid fa-infinity',
+    text: 'Intactic Ecosystem',
   },
-  {
-    badge: { icon: 'fa-solid fa-signature', text: 'Elite Personal Branding' },
-    tag: 'Pioneering Professional Web Presence in Bangladesh',
-    preTitle: 'Command Your',
-    highlightWord: 'Digital Authority',
-    postTitle: 'With Bespoke Web Presence Built For Leaders.',
-    desc: 'Scale your reputation beyond referrals. We craft premium, custom-coded digital portfolios and booking systems that position doctors, engineers, and executives as the definitive voice in their field.',
-    cta1: { label: 'Get Custom Build', href: '#contact' },
-    accent: '#FBAF32',
-    stats: [
-      { num: '100%', label: 'Bespoke Code' },
-      { num: '10X', label: 'Brand Authority' },
-    ],
-    img1: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=85',
-    img2: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80',
+  heading: {
+    pre: 'Enterprise',
+    highlight: 'Business Ecosystem',
+    post: 'Built for Scalable Growth',
   },
-];
-
+  subheading:
+    'We fuse deep tech with essential industries — providing the code behind modern products and the intelligence powering the vital needs of ambitious teams.',
+  primaryCta: { label: 'Learn More', href: '#about' },
+  secondaryCta: { label: 'Start a Project', href: '#contact' },
+  metrics: [
+    { num: '200+', label: 'Products Shipped' },
+    { num: '98%', label: 'Client Satisfaction' },
+    { num: '15+', label: 'Industries Served' },
+  ],
+  illustration: {
+    // Static poster shown while the video buffers or for reduced-motion users
+    poster:
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&q=85',
+    // Optimized, royalty-free, brand-relevant loop. Sources ordered by
+    // size (mobile-first → desktop). Replace with a custom reel when ready.
+    video: {
+      mp4: 'https://cdn.coverr.co/videos/coverr-developer-working-on-code-7727/1080p.mp4',
+      webm: 'https://cdn.coverr.co/videos/coverr-developer-working-on-code-7727/1080p.webm',
+      // Lower-bitrate fallback for slow connections
+      mp4Low: 'https://cdn.coverr.co/videos/coverr-developer-working-on-code-7727/720p.mp4',
+    },
+    caption: 'AI-powered product engineering',
+  },
+  chatWidget: {
+    avatar:
+      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=120&q=80',
+    name: 'Intactic AI',
+    handle: 'Online',
+    prompt: 'Welcome to Intactic AI. Ask me anything about our services.',
+    cta: 'Ask Anything',
+  },
+};
 
 export const trustLogos = [
   { icon: 'fa-brands fa-google', label: 'Google' },
