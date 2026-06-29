@@ -1,17 +1,26 @@
 {
-  "name": "inievo-website",
+  "name": "intactic-innovations-website",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write \"**/*.{js,jsx,css,md,json}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,css,md,json}\""
   },
   "dependencies": {
     "@vercel/speed-insights": "^2.0.0",
-    "next": "latest",
+    "next": "^14.2.18",
     "next-cloudinary": "^2.0.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.18",
+    "prettier": "^3.3.3"
   }
 }

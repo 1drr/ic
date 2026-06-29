@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
@@ -167,11 +168,11 @@ export default function Header() {
                     <div className="megamenu-col">
                       <h4 className="megamenu-title"><i className="fa-solid fa-circle-info"></i> Inside Intactic</h4>
                       <ul className="megamenu-links">
-                        <li><a href="/about-us">About Us</a></li>
+                        <li><Link href="/about-us">About Us</Link></li>
                         <li><a href="#contact">Blog</a></li>
                         <li><a href="#case-studies">Case Studies</a></li>
                         <li><a href="#careers">Career</a></li>
-                        <li><a href="/contact-us">Contact</a></li>
+                        <li><Link href="/contact-us">Contact</Link></li>
                         <li><a href="#contact">Our Resources</a></li>
                         <li><a href="#contact">Investor Relations</a></li>
                       </ul>
@@ -230,7 +231,7 @@ export default function Header() {
               </button>
               <div className="accordion-panel">
                 <div className="accordion-section">
-                  <span className="section-title">Collaboration Model</span>
+                  <span className="drawer-section-title">Collaboration Model</span>
                   <ul className="sub-links">
 
                     <li><a href="#services" onClick={closeDrawer}>Managed Services</a></li>
@@ -240,7 +241,7 @@ export default function Header() {
                   </ul>
                 </div>
                 <div className="accordion-section">
-                  <span className="section-title">Top Services</span>
+                  <span className="drawer-section-title">Top Services</span>
                   <ul className="sub-links">
                     <li><a href="#ai-section" onClick={closeDrawer}>ML & AI Development</a></li>
                     <li><a href="#ai-section" onClick={closeDrawer}>Data Engineering</a></li>
@@ -251,7 +252,7 @@ export default function Header() {
                   </ul>
                 </div>
                 <div className="accordion-section">
-                  <span className="section-title">Enterprise Focused</span>
+                  <span className="drawer-section-title">Enterprise Focused</span>
                   <ul className="sub-links">
 
                     <li><a href="#tech-stack" onClick={closeDrawer}>Cloud Solutions</a></li>
@@ -288,14 +289,14 @@ export default function Header() {
               </button>
               <div className="accordion-panel">
                 <div className="accordion-section">
-                  <span className="section-title">Healthcare</span>
+                  <span className="drawer-section-title">Healthcare</span>
                   <ul className="sub-links">
                     <li><a href="#products" onClick={closeDrawer}>Omnizia</a></li>
                     <li><a href="#products" onClick={closeDrawer}>Time2Publish</a></li>
                   </ul>
                 </div>
                 <div className="accordion-section">
-                  <span className="section-title">LMS & AI</span>
+                  <span className="drawer-section-title">LMS & AI</span>
                   <ul className="sub-links">
                     <li><a href="#products" onClick={closeDrawer}>Proctoring Pro</a></li>
                     <li><a href="#ai-section" onClick={closeDrawer}>NeuraFlow - Conversational AI</a></li>
@@ -310,17 +311,17 @@ export default function Header() {
               </button>
               <div className="accordion-panel">
                 <div className="accordion-section">
-                  <span className="section-title">Inside Intactic</span>
+                  <span className="drawer-section-title">Inside Intactic</span>
                   <ul className="sub-links">
-                    <li><a href="/about-us" onClick={closeDrawer}>About Us</a></li>
+                    <li><Link href="/about-us" onClick={closeDrawer}>About Us</Link></li>
                     <li><a href="#contact" onClick={closeDrawer}>Blog</a></li>
                     <li><a href="#case-studies" onClick={closeDrawer}>Case Studies</a></li>
                     <li><a href="#careers" onClick={closeDrawer}>Career</a></li>
-                    <li><a href="/contact-us" onClick={closeDrawer}>Contact</a></li>
+                    <li><Link href="/contact-us" onClick={closeDrawer}>Contact</Link></li>
                   </ul>
                 </div>
                 <div className="accordion-section">
-                  <span className="section-title">Recognitions</span>
+                  <span className="drawer-section-title">Recognitions</span>
                   <ul className="sub-links">
                     <li><a href="#recognitions" onClick={closeDrawer}>Partners</a></li>
                     <li><a href="#contact" onClick={closeDrawer}>Security & Sustainability</a></li>

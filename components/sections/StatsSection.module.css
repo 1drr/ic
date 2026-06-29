@@ -58,37 +58,95 @@
 }
 
 /* Tablet */
+@media (max-width: 1100px) {
+  .stats-section {
+    padding: 70px 0;
+  }
+
+  .stats-grid-wrap {
+    gap: 22px;
+  }
+}
+
 @media (max-width: 1024px) {
   .stats-grid-wrap {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 18px;
+  }
+
+  .stat-block {
+    padding: 28px 18px;
+  }
+
+  .stat-num-wrap {
+    font-size: 2.6rem;
   }
 }
 
 /* Mobile Portrait */
 @media (max-width: 640px) {
   .stats-section {
-    padding: 60px 0;
+    padding: 56px 0;
   }
+
   .stats-grid-wrap {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 12px;
   }
+
   .stat-block {
-    padding: 24px 12px;
+    padding: 22px 12px;
     border-radius: 16px;
+    align-items: center;
   }
+
   .stat-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 1.2rem;
+    width: 46px;
+    height: 46px;
+    font-size: 1.15rem;
     margin-bottom: 4px;
   }
+
   .stat-num-wrap {
-    font-size: 2.2rem;
+    font-size: 1.95rem;
   }
+
   .stat-label {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     max-width: 100%;
+    text-align: center;
+    line-height: 1.4;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 400px) {
+  .stats-section {
+    padding: 48px 0;
+  }
+
+  .stats-grid-wrap {
+    gap: 10px;
+  }
+
+  .stat-block {
+    padding: 18px 10px;
+    border-radius: 14px;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+
+  .stat-num-wrap {
+    font-size: 1.65rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    line-height: 1.35;
   }
 }

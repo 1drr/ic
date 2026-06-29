@@ -39,8 +39,13 @@
 }
 
 @keyframes glowFloat {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(40px, -60px) scale(1.1); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(40px, -60px) scale(1.1);
+  }
 }
 
 /* ════════════════════════════════════════════════════
@@ -76,7 +81,7 @@
   margin: 0 auto;
   padding: 48px 24px;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 60px;
   align-items: center;
   position: relative;
@@ -127,6 +132,9 @@
   color: var(--color-text-dark);
   margin: 0 0 22px;
   letter-spacing: -0.03em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .heroDesc {
@@ -162,6 +170,7 @@
   text-decoration: none;
   white-space: nowrap;
 }
+
 .btnPrimary:hover {
   background: #E69D24;
   transform: translateY(-2px);
@@ -184,6 +193,7 @@
   text-decoration: none;
   white-space: nowrap;
 }
+
 .btnSecondary:hover {
   border-color: var(--color-text-dark);
   background: rgba(17, 23, 44, 0.04);
@@ -237,14 +247,14 @@
   position: relative;
   width: 100%;
   max-width: 500px;
-  height: 460px;
+  height: clamp(360px, 45vw, 460px);
   margin: 0 auto;
 }
 
 /* ── Decorative dot-grid background ── */
 .gridBg {
   position: absolute;
-  inset: -30px;
+  inset: -20px;
   background-image: radial-gradient(circle, #CBD5E1 1px, transparent 1px);
   background-size: 22px 22px;
   opacity: 0.45;
@@ -258,8 +268,9 @@
   position: absolute;
   top: 20px;
   left: 0;
-  width: 320px;
-  height: 240px;
+  width: clamp(220px, 32vw, 320px);
+  height: clamp(165px, 24vw, 240px);
+  aspect-ratio: 4 / 3;
   border-radius: 20px;
   overflow: hidden;
   box-shadow:
@@ -271,8 +282,13 @@
 }
 
 @keyframes cardFloat1 {
-  from { transform: rotate(-2deg) translateY(0); }
-  to   { transform: rotate(-2deg) translateY(-10px); }
+  from {
+    transform: rotate(-2deg) translateY(0);
+  }
+
+  to {
+    transform: rotate(-2deg) translateY(-10px);
+  }
 }
 
 .mainImg {
@@ -282,6 +298,7 @@
   display: block;
   transition: transform 0.6s ease;
 }
+
 .mainImgCard:hover .mainImg {
   transform: scale(1.04);
 }
@@ -317,8 +334,9 @@
   position: absolute;
   bottom: 10px;
   right: 0;
-  width: 230px;
-  height: 165px;
+  width: clamp(160px, 23vw, 230px);
+  height: clamp(115px, 17vw, 165px);
+  aspect-ratio: 4 / 3;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 16px 40px rgba(17, 23, 44, 0.14);
@@ -328,8 +346,13 @@
 }
 
 @keyframes cardFloat2 {
-  from { transform: rotate(2.5deg) translateY(0); }
-  to   { transform: rotate(2.5deg) translateY(-8px); }
+  from {
+    transform: rotate(2.5deg) translateY(0);
+  }
+
+  to {
+    transform: rotate(2.5deg) translateY(-8px);
+  }
 }
 
 .secondaryImg {
@@ -339,6 +362,7 @@
   display: block;
   transition: transform 0.6s ease;
 }
+
 .secondaryImgCard:hover .secondaryImg {
   transform: scale(1.05);
 }
@@ -354,7 +378,7 @@
   position: absolute;
   top: 10px;
   right: -12px;
-  width: 148px;
+  width: clamp(120px, 15vw, 148px);
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -400,7 +424,7 @@
   position: absolute;
   bottom: 30px;
   left: -14px;
-  width: 150px;
+  width: clamp(120px, 15vw, 150px);
   background: #11172C;
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 16px 40px rgba(17, 23, 44, 0.22);
@@ -451,18 +475,23 @@
   white-space: nowrap;
   z-index: 6;
 }
-.techPill i { font-size: 0.9rem; }
+
+.techPill i {
+  font-size: 0.9rem;
+}
 
 .techPill1 {
   top: -20px;
   left: 20%;
   animation: floatY 4s ease-in-out infinite alternate;
 }
+
 .techPill2 {
   top: 50%;
   right: -20px;
   animation: floatY 5s ease-in-out infinite alternate 0.8s;
 }
+
 .techPill3 {
   bottom: -18px;
   left: 30%;
@@ -486,13 +515,25 @@
 }
 
 @keyframes floatY {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-10px); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes ringPulse {
-  0%   { transform: translate(-50%, -50%) scale(0.88); opacity: 0.5; }
-  100% { transform: translate(-50%, -50%) scale(1.12); opacity: 0; }
+  0% {
+    transform: translate(-50%, -50%) scale(0.88);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.12);
+    opacity: 0;
+  }
 }
 
 /* ════════════════════════════════════════════════════
@@ -517,14 +558,37 @@
   transition: all 0.2s ease;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
+
 .heroArrow:hover {
   background: var(--color-brand);
   color: #fff;
   border-color: var(--color-brand);
   transform: translateY(-50%) scale(1.08);
 }
-.heroArrowLeft  { left: 20px; }
-.heroArrowRight { right: 20px; }
+
+.heroArrowLeft {
+  left: 20px;
+}
+
+.heroArrowRight {
+  right: 20px;
+}
+
+@media (max-width: 1100px) {
+  .heroArrowLeft {
+    left: 8px;
+  }
+
+  .heroArrowRight {
+    right: 8px;
+  }
+
+  .heroArrow {
+    width: 40px;
+    height: 40px;
+    font-size: 0.78rem;
+  }
+}
 
 .heroDots {
   position: absolute;
@@ -546,6 +610,7 @@
   transition: all 0.3s ease;
   padding: 0;
 }
+
 .activeDot {
   background: var(--color-brand);
   width: 24px;
@@ -581,6 +646,7 @@
   overflow: hidden;
   width: 100%;
 }
+
 .marqueeContainer::before,
 .marqueeContainer::after {
   content: '';
@@ -591,10 +657,12 @@
   z-index: 2;
   pointer-events: none;
 }
+
 .marqueeContainer::before {
   left: 0;
   background: linear-gradient(to right, #F8FAFC, transparent);
 }
+
 .marqueeContainer::after {
   right: 0;
   background: linear-gradient(to left, #F8FAFC, transparent);
@@ -606,13 +674,19 @@
   animation: marqueeScroll 30s linear infinite;
   width: max-content;
 }
+
 .marqueeTrack:hover {
   animation-play-state: paused;
 }
 
 @keyframes marqueeScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .trustLogoPill {
@@ -630,12 +704,14 @@
   box-shadow: 0 4px 12px rgba(17, 23, 44, 0.03);
   transition: all 0.2s ease;
 }
+
 .trustLogoPill:hover {
   border-color: rgba(29, 158, 218, 0.3);
   color: var(--color-brand);
   box-shadow: 0 6px 20px rgba(29, 158, 218, 0.12);
   transform: translateY(-2px);
 }
+
 .trustLogoPill i {
   color: var(--color-brand);
   font-size: 1rem;
@@ -665,7 +741,7 @@
 /* ── Tablet (≤ 1024px) ── */
 @media (max-width: 1024px) {
   .heroSlidesContainer {
-    min-height: 520px;
+    min-height: auto;
   }
 
   .heroSlideInner {
@@ -700,36 +776,102 @@
   }
 
   .heroVisualWrap {
-    height: 380px;
     max-width: 440px;
   }
 
-  .mainImgCard { width: 270px; height: 200px; }
-  .secondaryImgCard { width: 195px; height: 140px; }
-  .techPill2 { right: -8px; }
-  .techPill3 { display: none; }
+  .glassStatCard {
+    right: 0;
+  }
+
+  .darkMetricCard {
+    left: 0;
+  }
+
+  .techPill2 {
+    right: 0;
+  }
+
+  .techPill3 {
+    display: none;
+  }
 }
 
 /* ── Mobile (≤ 640px) ── */
 @media (max-width: 640px) {
+  .heroSection {
+    padding-top: calc(var(--header-height-normal) - 14px);
+  }
+
   .heroSlidesContainer {
     min-height: auto;
-    padding-bottom: 56px;
+    padding-bottom: 32px;
   }
 
   .heroSlideInner {
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 28px 16px 20px;
+    gap: 28px;
+    padding: 28px 18px 20px;
+  }
+
+  .heroTextCol {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .heroBadge {
+    font-size: 0.72rem;
+    padding: 6px 14px;
+    margin-bottom: 14px;
   }
 
   .heroH1 {
-    font-size: 1.75rem;
+    font-size: clamp(1.55rem, 6.8vw, 1.95rem);
+    line-height: 1.18;
+    margin-bottom: 14px;
+  }
+
+  .heroTag {
+    font-size: 0.8rem;
   }
 
   .heroDesc {
-    font-size: 0.97rem;
-    margin-bottom: 24px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0 auto 24px;
+    max-width: 480px;
+  }
+
+  .heroCtaRow {
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .heroStatsRow {
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .heroStatDivider {
+    display: none;
+  }
+
+  .heroStatItem {
+    align-items: center;
+    text-align: center;
+    min-width: 90px;
+  }
+
+  .heroStatNum {
+    font-size: 1.4rem;
+  }
+
+  .heroStatLbl {
+    font-size: 0.7rem;
   }
 
   .heroImgCol {
@@ -744,28 +886,88 @@
     position: static;
     transform: none;
     justify-content: center;
-    margin: 12px 0 4px;
-  }
-
-  .heroStatsRow {
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .heroStatDivider {
-    display: none;
-  }
-
-  .heroStatNum {
-    font-size: 1.5rem;
+    margin: 4px 0 0;
+    padding: 8px 0;
   }
 
   .trustBar {
-    padding: 16px 0;
+    padding: 18px 0;
+  }
+
+  .trustBarLabel {
+    padding: 0 16px;
+    font-size: 0.7rem;
+  }
+
+  .trustLogoPill {
+    padding: 7px 14px;
+    font-size: 0.8rem;
   }
 
   .heroWaveBridge {
     display: none;
+  }
+}
+
+/* ── Extra-small phones (≤ 400px) ── */
+@media (max-width: 400px) {
+  .heroSlideInner {
+    padding: 22px 14px 18px;
+    gap: 22px;
+  }
+
+  .heroH1 {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .heroBadge {
+    font-size: 0.68rem;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+  }
+
+  .heroDesc {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .heroCtaRow {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 18px;
+    font-size: 0.9rem;
+  }
+
+  .heroStatsRow {
+    gap: 12px;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .heroStatItem {
+    min-width: 76px;
+    flex: 1;
+  }
+
+  .heroStatNum {
+    font-size: 1.25rem;
+  }
+
+  .heroStatLbl {
+    font-size: 0.66rem;
+  }
+
+  .heroDots {
+    margin: 6px 0 0;
   }
 }

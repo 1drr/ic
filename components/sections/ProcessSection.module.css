@@ -11,6 +11,7 @@
   margin-top: 48px;
   position: relative;
 }
+
 .process-steps::before {
   content: '';
   position: absolute;
@@ -50,12 +51,14 @@
   color: var(--color-text-dark);
   margin-bottom: 8px;
 }
+
 .step-body p {
   font-size: 0.9rem;
   color: var(--color-text-muted);
   line-height: 1.65;
   margin-bottom: 10px;
 }
+
 .step-tag {
   display: inline-block;
   font-size: 0.75rem;
@@ -69,48 +72,113 @@
 }
 
 @media (max-width: 1024px) {
-  .process-steps { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 40px;
+  .process-section {
+    padding: 70px 0;
   }
-  .process-steps::before { display: none; }
+
+  .process-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 24px;
+  }
+
+  .process-steps::before {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .process-steps { 
-    grid-template-columns: 1fr; 
-    gap: 40px; 
+  .process-section {
+    padding: 60px 0;
   }
-  .process-steps::before { 
-    display: block; 
+
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-top: 32px;
+  }
+
+  .process-steps::before {
+    display: block;
     width: 2px;
     height: calc(100% - 60px);
     top: 30px;
-    left: 28px;
+    left: 27px;
     background: linear-gradient(180deg, var(--color-brand), rgba(29, 158, 218, 0.05));
   }
+
   .process-step-card {
     flex-direction: row;
     align-items: flex-start;
-    gap: 24px;
+    gap: 22px;
   }
+
   .step-number {
     flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(29, 158, 218, 0.25);
+  }
+
+  .step-body h3 {
+    font-size: 1rem;
+  }
+
+  .step-body p {
+    font-size: 0.88rem;
   }
 }
 
 @media (max-width: 480px) {
+  .process-section {
+    padding: 56px 0;
+  }
+
+  .process-steps {
+    gap: 28px;
+  }
+
   .process-steps::before {
-    left: 24px;
+    left: 23px;
     top: 24px;
     height: calc(100% - 48px);
   }
+
   .step-number {
     width: 48px;
     height: 48px;
     font-size: 1rem;
   }
+
   .process-step-card {
     gap: 16px;
+  }
+
+  .step-body h3 {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .step-body p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .step-tag {
+    font-size: 0.7rem;
+    padding: 3px 9px;
+  }
+}
+
+@media (max-width: 360px) {
+  .process-steps::before {
+    left: 20px;
+  }
+
+  .step-number {
+    width: 42px;
+    height: 42px;
+    font-size: 0.92rem;
+  }
+
+  .process-step-card {
+    gap: 14px;
   }
 }
