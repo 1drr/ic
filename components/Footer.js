@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-upper">
         <div className="footer-brand-col">
-          <a href="#site-header" className="footer-logo">
+          <Link href="/" className="footer-logo" scroll={true}>
             <Image
               src="https://res.cloudinary.com/det1qnlrh/image/upload/v1782432654/Intactic-white_vmyikx.png"
               alt="Intactic Logo"
@@ -14,7 +14,7 @@ export default function Footer() {
               height={40}
               style={{ width: 'auto', height: '36px', objectFit: 'contain', marginBottom: '8px' }}
             />
-          </a>
+          </Link>
 
           <div className="footer-socials">
             <a href="https://www.facebook.com/intactic" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fa-brands fa-facebook-f"></i></a>

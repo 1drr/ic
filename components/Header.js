@@ -60,7 +60,7 @@ export default function Header() {
     <>
       <header className={`site-header ${isSticky ? 'sticky' : ''}`} id="site-header">
         <div className="header-container">
-          <a href="#site-header" className="brand-logo" aria-label="Intactic Innovations Home">
+          <Link href="/" className="brand-logo" aria-label="Intactic Innovations Home" scroll={true}>
             <Image
               src="https://res.cloudinary.com/det1qnlrh/image/upload/v1782432654/Intactic_ltgcnt.png"
               alt="Intactic Logo"
@@ -69,7 +69,7 @@ export default function Header() {
               priority
               className="logo-img"
             />
-          </a>
+          </Link>
 
           <nav className="desktop-nav" aria-label="Desktop Navigation">
             <ul className="nav-list">
@@ -210,7 +210,7 @@ export default function Header() {
 
       <div className={`mobile-drawer ${isDrawerOpen ? 'active' : ''}`} id="mobile-drawer">
         <div className="drawer-header">
-          <a href="#site-header" className="drawer-logo" onClick={closeDrawer}>
+          <Link href="/" className="drawer-logo" onClick={closeDrawer} scroll={true}>
             <Image
               src="https://res.cloudinary.com/det1qnlrh/image/upload/v1782432654/Intactic_ltgcnt.png"
               alt="Intactic Logo"
@@ -218,7 +218,7 @@ export default function Header() {
               height={36}
               style={{ width: 'auto', height: '32px', objectFit: 'contain' }}
             />
-          </a>
+          </Link>
           <button className="drawer-close" aria-label="Close Navigation Menu" onClick={closeDrawer}>
             <i className="fa-solid fa-xmark"></i>
           </button>
